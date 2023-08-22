@@ -1,15 +1,19 @@
 import { useState } from 'react';
 import './ContactPage.css';
+import Modal from './Modal';
 
 const ContactPage = (props) => {
     const [name, setName] = useState("");
     const [age, setAge] = useState("");
     const [enteredContacts, setEnteredContact] = useState(props.contacts);
+    const [invalid, setInvalid] = useState(false);
 
     const nameInputHandler = (e) => {
+        setInvalid(false);
         setName(e.target.value);
     }
     const ageInputHandler = (e) => {
+        setInvalid(false);
         setAge(e.target.value);
     }
     const submitHandler = (e) => {
@@ -21,9 +25,13 @@ const ContactPage = (props) => {
             age: age,
             id: Math.random().toString()
         }
-        setEnteredContact((prevCont => {
-            return [...prevCont,cont]
-        }))
+        if(cont.name.trim().length !== 0 && cont.age.trim().length !== 0 && Number(cont.age.trim()) > 0){
+            setEnteredContact((prevCont => {
+                return [...prevCont,cont]
+            }))
+        }else{
+            setInvalid(true);
+        }
     }
 
 return <div>
@@ -40,9 +48,9 @@ return <div>
             <input type="submit"/>
         </div>
     </form>
+    {invalid && <Modal/>}
     <ul className='contact-list'>
         <h3>Contacts come here</h3>
-        <li>Hello</li>
         {enteredContacts.map(val => (
             <li key={val.id}>{val.name} - {val.age}</li>
         ))}
