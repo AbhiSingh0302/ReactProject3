@@ -1,0 +1,31 @@
+.contact-form{
+    width: 15%;
+    margin: 5rem auto;
+    padding: 2rem 5rem;
+    background-color: #dd4b4b;
+    border-radius: 10px;
+}
+
+.contact-form__inputs{
+    margin: 1rem 0;
+}
+
+.contact-form__inputs input{
+    float: right;
+    padding: 3px;
+}
+
+.contact-list{
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    list-style: none;
+    padding: 2rem 5rem;
+    background-color: #dd4b4b;
+    border-radius: 10px;
+}
+.contact-list li{
+    background-color: aliceblue;
+    margin: 5px 0;
+    padding: 3px 0;
+}
