@@ -12,10 +12,12 @@ const ContactPage = (props) => {
         setInvalid(false);
         setName(e.target.value);
     }
+
     const ageInputHandler = (e) => {
         setInvalid(false);
         setAge(e.target.value);
     }
+
     const submitHandler = (e) => {
         e.preventDefault();
         console.log("submitted");
@@ -26,9 +28,7 @@ const ContactPage = (props) => {
             id: Math.random().toString()
         }
         if(cont.name.trim().length !== 0 && cont.age.trim().length !== 0 && Number(cont.age.trim()) > 0){
-            setEnteredContact((prevCont => {
-                return [...prevCont,cont]
-            }))
+            setEnteredContact(prevCont => [...prevCont,cont])
         }else{
             setInvalid(true);
         }
@@ -36,24 +36,23 @@ const ContactPage = (props) => {
 
 return <div>
     <form onSubmit={submitHandler} className='contact-form'>
-        <div className='contact-form__inputs'>
+        <div className='contact-form__inputs main-input'>
             <label>Name</label>
-            <input type="text" value={name} onChange={nameInputHandler}/>
+            <input type="text" value={name} onChange={nameInputHandler} className='main-input'/>
         </div>
-        <div className='contact-form__inputs'>
+        <div className='contact-form__inputs main-input'>
             <label>Age</label>
-            <input type="number" value={age} onChange={ageInputHandler}/>
+            <input type="number" value={age} onChange={ageInputHandler} className='main-input'/>
         </div>
         <div className='contact-form__inputs'>
-            <input type="submit"/>
+            <input type="submit" id='submit'/>
         </div>
     </form>
     {invalid && <Modal/>}
     <ul className='contact-list'>
-        <h3>Contacts come here</h3>
-        {enteredContacts.map(val => (
+        {enteredContacts.length>0 ? enteredContacts.map(val => (
             <li key={val.id}>{val.name} - {val.age}</li>
-        ))}
+        )) : <h3>Contacts come here</h3>}
     </ul>
 </div>
 }
